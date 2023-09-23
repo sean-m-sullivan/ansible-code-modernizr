@@ -43,7 +43,7 @@ def process_file(file_path, fqcn_mapping):
         # Replace module names with their corresponding FQCN prefixes
         for module_name, fqcn_prefix in fqcn_mapping.items():
             pattern = fr'\s({re.escape(module_name)}:)'
-            replacement = f' {fqcn_prefix}.\g<1>'
+            replacement = f' {fqcn_prefix}.\g<1>' # noqa W605 #TODO come back and look into this
             file_contents = re.sub(pattern, replacement, file_contents)
 
         # Check if '---' is present at the start of the file, if not, add it

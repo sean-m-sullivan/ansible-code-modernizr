@@ -6,7 +6,7 @@ import os
 script_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
 sys.path.append(script_dir)
 
-import convertV3  # Import your actual script here
+import convertV3  # noqa: E402
 
 class TestProcessFile(unittest.TestCase):
     def test_process_file(self):
@@ -29,7 +29,7 @@ class TestProcessFile(unittest.TestCase):
           return fqcn_mapping
         fqcn_mapping = load_fqcn_mapping()
         # Call the process_file function on the temporary file
-        convertV3.process_file('tests/temp_test_file.yml', None, [], fqcn_mapping)
+        convertV3.process_file('tests/temp_test_file.yml', fqcn_mapping)
 
         # Read the modified file's content
         with open('tests/temp_test_file.yml', 'r') as temp_file:
