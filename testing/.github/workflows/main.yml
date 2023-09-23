@@ -1,0 +1,23 @@
+---
+name: ansible-lint
+on: [push]
+
+jobs:
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Install ansible-lint
+        run: pip3 install ansible-core==2.13.6 ansible-lint==6.8.6 yamllint==1.28.0
+
+      # - name: Add cloud and galaxy tokens
+      #   run: echo -e  "${{ secrets.galaxy_token }}"  >> ansible.cfg
+
+      - name: Install Collections
+        run: ansible-galaxy collection install -f -r collections/requirements.yml
+
+      - name: lint Ansible Playbook
+        run: ansible-lint --offline --profile=production
+...

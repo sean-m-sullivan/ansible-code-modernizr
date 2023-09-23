@@ -1,0 +1,11 @@
+---
+collections:
+  - name: Ansible.posix
+  - name: Community.general
+  - name: Infra.controller_configuration
+  - name: Infra.ah_configuration
+  - name: Infra.ee_utilities
+  - name: Infra.aap_utilities
+  - name: Containers.podman
+  - name: Awx.awx
+...
