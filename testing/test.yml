@@ -1,28 +1,27 @@
----
-- name: Test
+- name: test
   host: all
   tasks:
-    # comment here
-    - name: Something to test here
-      ansible.builtin.debug:
-        msg: "{{ test }}"
-    - name: Something to test here2
-      ansible.builtin.debug:
-        msg: "{{ test1 |est2 }}"
-    - name: Something to test here3
-      ansible.builtin.debug:
-        msg: "{{ (test3) }}"
+    #comment here
+    - name: something to test here
+      debug:
+        msg: "{{test}}"
+    - name: something to test here2
+      debug:
+        msg: "{{test1 |est2}}"
+    - name: something to test here3
+      debug:
+        msg: "{{(test3)}}"
 
-    - name: User testing
-      ansible.builtin.user:
+
+    - name: user testing
+      user:
         name: james
-        ansible.builtin.shell: /bin/bash
+        shell: /bin/bash
         groups: admins,developers
         append: yes
 
-    - name: Regex
-      ansible.builtin.lineinfile:
+    - name: regex
+      lineinfile:
         path: /etc/selinux/config
         regexp: '^SELINUX='
         line: SELINUX=enforcing
-...
