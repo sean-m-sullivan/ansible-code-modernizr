@@ -7,7 +7,7 @@
         msg: "{{test}}"
     - name: something to test here2
       debug:
-        msg: "{{test1 |est2}}"
+        msg: "{{test1|test2}}"
     - name: something to test here3
       debug:
         msg: "{{(test3)}}"
