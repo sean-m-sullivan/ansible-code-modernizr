@@ -17,7 +17,7 @@ def load_fqcn_mapping(mapping_file):
         logging.error(f"Mapping file '{mapping_file}' not found.")
     return fqcn_mapping
 
-def process_file(file_path, patterns_and_replacements, skip_list, fqcn_mapping):
+def process_file(file_path, fqcn_mapping):
     try:
         with open(file_path, 'r') as file:
             file_contents = file.read()
@@ -63,7 +63,7 @@ def process_file(file_path, patterns_and_replacements, skip_list, fqcn_mapping):
         logging.error(f"Error processing file {file_path}: {str(e)}")
 
 
-def process_files_in_parallel(directory_path, patterns_and_replacements, skip_list, skip_dirs, fqcn_mapping):
+def process_files_in_parallel(directory_path, skip_list, skip_dirs, fqcn_mapping):
     with ThreadPoolExecutor() as executor:
         for root, dirs, files in os.walk(directory_path):
             # Filter out directories based on the provided skip_dirs argument
@@ -73,7 +73,7 @@ def process_files_in_parallel(directory_path, patterns_and_replacements, skip_li
                     continue
                 elif file_name.endswith(('.yml', '.yaml')):
                     file_path = os.path.join(root, file_name)
-                    executor.submit(process_file, file_path, patterns_and_replacements, skip_list, fqcn_mapping)
+                    executor.submit(process_file, file_path, fqcn_mapping)
 
 def main():
     parser = argparse.ArgumentParser(description="YAML file processing script")
@@ -95,7 +95,7 @@ def main():
         return
 
     # Process files in parallel
-    process_files_in_parallel(args.path, None, args.skip_list, args.skip_dirs, fqcn_mapping)
+    process_files_in_parallel(args.path, args.skip_list, args.skip_dirs, fqcn_mapping)
 
 if __name__ == "__main__":
     main()
