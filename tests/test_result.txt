@@ -2,7 +2,7 @@
 - name: Test
   host: all
   tasks:
-    # comment here
+    # comment here, link with pound: https://github.com/sean-m-sullivan/ansible-code-modernizr/tree/main# ansible-code-modernizr
     - name: Something to test here
       ansible.builtin.debug:
         msg: "{{ test }}"
@@ -12,6 +12,12 @@
     - name: Something to test here3
       ansible.builtin.debug:
         msg: "{{ (test3) }}"
+
+    - ansible.builtin.uri:
+        url: https://github.com/sean-m-sullivan/ansible-code-modernizr/tree/main# ansible-code-modernizr
+        return_content: true
+      register: this
+      failed_when: this is failed or "'AWESOME' not in this.content"
 
     - name: User testing
       ansible.builtin.user:
